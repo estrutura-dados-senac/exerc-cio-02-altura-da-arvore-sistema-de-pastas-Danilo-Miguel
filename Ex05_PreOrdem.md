@@ -1,12 +1,12 @@
 # Exercicio 5 - Percurso Pre-Ordem (Checklist de Deploy)
 
-## Cenario realista
+## Cenario 
 Voce tem um fluxo de deploy em etapas e precisa registrar a ordem de execucao do processo pai antes dos subprocessos.
 
 ## Conceito praticado
 - Percurso pre-ordem: raiz, esquerda, direita.
 
-## Guia passo a passo (bem guiado)
+## Guia passo a passo 
 1. Crie a funcao preOrdem que retorna uma lista de strings.
 2. Dentro dela, crie a variavel resultado como lista vazia.
 3. Chame uma funcao auxiliar preOrdemRec(raiz, resultado).
@@ -17,7 +17,7 @@ Voce tem um fluxo de deploy em etapas e precisa registrar a ordem de execucao do
 	- Chame recursivamente para direita.
 5. Retorne a lista resultado no metodo principal.
 
-## Orientacoes claras para resolucao
+## Orientacoes  para resolucao
 1. Grave mentalmente a ordem: primeiro o no atual.
 2. Use lista para guardar a sequencia visitada.
 3. Teste com arvore pequena para conferir visualmente a ordem.
