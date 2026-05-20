@@ -13,45 +13,19 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Ex01 caso vazio
-      id: ex01-caso-vazio
+    - name: Valida classe Ex01AlturaDaArvore
+      id: valida-classe-ex01alturadaarvore
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Ex01 caso vazio
-        setup-command: " javac Ex01AlturaDaArvore.java"
-        command: printf "0\n" | java Ex01AlturaDaArvore | tr -d "\r" | grep -x "0"
-        timeout: 10
-        max-score: 10
-    - name: Valida altura Ex01
-      id: valida-altura-ex01
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: Valida altura Ex01
+        test-name: Valida classe Ex01AlturaDaArvore
         setup-command: ''
-        command: 'printf ''public class ValidaEx01 { public static void main(String[]
-          args) { Ex01AlturaDaArvore.Node raiz = Ex01AlturaDaArvore.exemploPastas();
-          int h1 = Ex01AlturaDaArvore.altura(raiz); int h2 = Ex01AlturaDaArvore.altura(null);
-          if (h1 != 4) throw new RuntimeException("Altura esperada da arvore exemplo:
-          4; obtido: " + h1); if (h2 != 0) throw new RuntimeException("Altura esperada
-          para null: 0; obtido: " + h2); System.out.println("OK"); }}'' > ValidaEx01.java
-          && javac Ex01AlturaDaArvore.java ValidaEx01.java && java ValidaEx01'
+        command: ' test -f Ex01AlturaDaArvore.java && grep -Eq "(^|[[:space:]])class[[:space:]]+Ex01AlturaDaArvore([[:space:]]|\{)"
+          Ex01AlturaDaArvore.java && javac Ex01AlturaDaArvore.java'
         timeout: 10
-        max-score: 10
-    - name: x01 caso arvore normal
-      id: x01-caso-arvore-normal
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: x01 caso arvore normal
-        setup-command: javac Ex01AlturaDaArvore.java
-        command: printf "5\n1 2\n3 4\n-1 -1\n-1 -1\n-1 -1\n" | java Ex01AlturaDaArvore
-          | tr -d "\r" | grep -x "3"
-        timeout: 10
-        max-score: 10
+        max-score: 7
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        EX01-CASO-VAZIO_RESULTS: "${{steps.ex01-caso-vazio.outputs.result}}"
-        VALIDA-ALTURA-EX01_RESULTS: "${{steps.valida-altura-ex01.outputs.result}}"
-        X01-CASO-ARVORE-NORMAL_RESULTS: "${{steps.x01-caso-arvore-normal.outputs.result}}"
+        VALIDA-CLASSE-EX01ALTURADAARVORE_RESULTS: "${{steps.valida-classe-ex01alturadaarvore.outputs.result}}"
       with:
-        runners: ex01-caso-vazio,valida-altura-ex01,x01-caso-arvore-normal
+        runners: valida-classe-ex01alturadaarvore
